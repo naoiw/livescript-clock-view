@@ -1,0 +1,33 @@
+name: Validate develop
+
+on:
+  push:
+    branches: [develop]
+  pull_request:
+    branches: [main, develop]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 26
+          check-latest: true
+      - name: Install dependencies (lockfile bootstrap)
+        run: npm install --no-audit --no-fund
+      - name: Print lockfile for bootstrap
+        run: |
+          echo LOCKFILE_BEGIN
+          cat package-lock.json
+          echo LOCKFILE_END
+      - name: Build and test
+        run: npm run check
