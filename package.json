@@ -1,0 +1,19 @@
+{
+  "name": "livescript-clock-view",
+  "version": "1.0.0",
+  "private": true,
+  "description": "LiveScript + Canvas clock",
+  "scripts": {
+    "build": "lsc -c -o dist src/clock.ls && node -e \"require('node:fs').copyFileSync('src/styles.css', 'dist/styles.css')\"",
+    "test": "node --test tests/*.test.cjs",
+    "smoke": "node tests/browser-smoke.cjs",
+    "check": "npm run build && npm run test && npm run smoke",
+    "dev": "npm run build && python3 -m http.server 3000"
+  },
+  "devDependencies": {
+    "livescript": "1.6.0"
+  },
+  "engines": {
+    "node": ">=22 <27"
+  }
+}
