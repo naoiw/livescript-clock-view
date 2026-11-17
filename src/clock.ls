@@ -32,13 +32,26 @@ createParticles = (cx, cy, radius, hue, random = Math.random) ->
   for i in [0 til COUNT]
     angle = TAU * i / COUNT - HALF + (random! - 0.5) * 0.28
     speed = 55 + random! * 115
-    {x: cx + Math.cos(angle) * radius, y: cy + Math.sin(angle) * radius,
-     vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed,
-     hue, age: 0, life: 650 + random! * 550}
+    {
+      x: cx + Math.cos(angle) * radius
+      y: cy + Math.sin(angle) * radius
+      vx: Math.cos(angle) * speed
+      vy: Math.sin(angle) * speed
+      hue
+      age: 0
+      life: 650 + random! * 550
+    }
 
 moveParticle = (p, elapsed) ->
-  {x: p.x + p.vx * elapsed / 1000, y: p.y + p.vy * elapsed / 1000,
-   vx: p.vx, vy: p.vy, hue: p.hue, age: p.age + elapsed, life: p.life}
+  {
+    x: p.x + p.vx * elapsed / 1000
+    y: p.y + p.vy * elapsed / 1000
+    vx: p.vx
+    vy: p.vy
+    hue: p.hue
+    age: p.age + elapsed
+    life: p.life
+  }
 
 resizeCanvas = (canvas, ctx) ->
   w = window.innerWidth
