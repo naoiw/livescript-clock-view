@@ -22,12 +22,8 @@ jobs:
         with:
           node-version: 26
           check-latest: true
-      - name: Install dependencies (lockfile bootstrap)
-        run: npm install --no-audit --no-fund
-      - name: Print lockfile for bootstrap
-        run: |
-          echo LOCKFILE_BEGIN
-          cat package-lock.json
-          echo LOCKFILE_END
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
       - name: Build and test
         run: npm run check
